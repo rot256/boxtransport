@@ -1,6 +1,5 @@
 BoxTransport
 ============
-------------
 
 BoxTransport contains implementation of the [net.Conn](https://golang.org/pkg/net/#Conn) interface which allows for encrypted communication over TCP using NaCl boxes called BoxConn.  BoxConn can be used for streaming content (using the net.Conn interface).
 
