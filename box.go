@@ -31,10 +31,10 @@ type BoxConn struct {
 }
 
 const (
-	LenFieldSize   = 2                                       // Length field size
-	NonceSize  = 24                                      // Size of box nonce
-	MaxRawData = (1 << 16) - 1                           // Maximum raw data in frame (content + nonce + overhead)
-	MaxContent = MaxRawData - box.Overhead - NonceSize // Maximum encrypted content in frame
+	LenFieldSize = 2                                     // Length field size
+	NonceSize    = 24                                    // Size of box nonce
+	MaxRawData   = (1 << 16) - 1                         // Maximum raw data in frame (content + nonce + overhead)
+	MaxContent   = MaxRawData - box.Overhead - NonceSize // Maximum encrypted content in frame
 )
 
 func min(a, b int) int {
@@ -186,7 +186,7 @@ func (c *BoxConn) streamWriter() {
 		}
 
 		// Seal message
-		if frameSize > 0 && encMsg == nil {	
+		if frameSize > 0 && encMsg == nil {
 			encMsg, err = c.seal(frame[:frameSize])
 			if err != nil {
 				c.errors <- err
