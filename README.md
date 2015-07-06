@@ -51,3 +51,9 @@ A : No, BoxTransport attempts to combine multiple writes into a single frame.
 Q : Can I mix .ReadFrame with the .Write method?
 
 A : Yes, but it is probably a bad idea (see previous question).
+
+---
+
+Q : How do I add BoxTransport?
+
+A : go get github.com/rot256/boxtransport
