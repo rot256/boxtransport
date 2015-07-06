@@ -35,7 +35,9 @@ The nonce is randomly generated.
 
 ### Q & A
 
+
 > Q : Can I wrap a BoxTransport in a BoxTransport? (Onion encryption)
+
 > A : Yes (be aware of the overhead though)
 
 
