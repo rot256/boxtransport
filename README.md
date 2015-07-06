@@ -35,20 +35,19 @@ The nonce is randomly generated.
 
 ### Q & A
 
+---
 
-> Q : Can I wrap a BoxTransport in a BoxTransport? (Onion encryption)
+Q : Can I wrap a BoxTransport in a BoxTransport? (Onion encryption)
 
-> A : Yes (be aware of the overhead though)
+A : Yes (be aware of the overhead though)
 
-
-
+---
 
 Q : Is every Write in it's own NaCl box?
 
 A : No, BoxTransport attempts to combine multiple writes into a single frame.
 
-
-
+---
 
 Q : Can I mix .ReadFrame with the .Write method?
 
