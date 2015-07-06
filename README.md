@@ -50,4 +50,4 @@ A : No, BoxTransport attempts to combine multiple writes into a single frame.
 
 Q : Can I mix .ReadFrame with the .Write method?
 
-A : You can but it is probably a bad idea (see previous question).
+A : Yes, but it is probably a bad idea (see previous question).
