@@ -44,13 +44,19 @@ A : Yes (be aware of the overhead though)
 
 Q : Is every Write in it's own NaCl box?
 
-A : No, BoxTransport attempts to combine multiple writes into a single frame.
+A : No, BoxTransport attempts to combine multiple writes into a single frame. (even across diffrent goroutines)
 
 ---
 
 Q : Can I mix .ReadFrame with the .Write method?
 
 A : Yes, but it is probably a bad idea (see previous question).
+
+---
+
+Q : Can multiple goroutines access a BoxConn?
+
+A : Yes and every byte in a .Write call will be written to the socket consecutively.
 
 ---
 
