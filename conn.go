@@ -15,9 +15,9 @@ func (c *BoxConn) Write(b []byte) (n int, err error) {
 	c.outStream <- &writeRequest{msg: b, n: cnt}
 	for n < len(b) {
 		select {
-			case err = <-c.errors:
-			case m := <- cnt:
-				n += m
+		case err = <-c.errors:
+		case m := <-cnt:
+			n += m
 		}
 	}
 	return

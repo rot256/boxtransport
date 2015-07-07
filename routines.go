@@ -1,11 +1,11 @@
 package boxtransport
 
 import (
-	"encoding/binary"
 	"crypto/rand"
-	"time"
+	"encoding/binary"
 	"errors"
 	"golang.org/x/crypto/nacl/box"
+	"time"
 )
 
 /*
@@ -15,7 +15,7 @@ import (
 
 type writeRequest struct {
 	msg []byte
-	n chan int
+	n   chan int
 }
 
 // Frames raw data and writes to socket
@@ -113,7 +113,7 @@ func (c *BoxConn) streamWriter() {
 				req = nil
 			}
 		}
-		
+
 		// Wait a little for more content (if needed)
 		if MaxContent-frameSize > 0 {
 			if len(c.outStream) > 0 {
@@ -135,8 +135,6 @@ func (c *BoxConn) streamWriter() {
 		}
 	}
 }
-
-
 
 // Seals data
 func (c *BoxConn) seal(b []byte) ([]byte, error) {

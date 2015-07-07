@@ -9,7 +9,7 @@ import (
 )
 
 /*
- This file defines the underlying BoxConn structure 
+ This file defines the underlying BoxConn structure
  and available functions not declared in an interface.
 */
 
@@ -22,7 +22,7 @@ type BoxConn struct {
 	outBox    chan []byte
 	inBox     chan []byte
 	errors    chan error
-	
+
 	// Settings
 	holdTime time.Duration
 
@@ -42,7 +42,6 @@ const (
 	MaxRawData   = (1 << 16) - 1                         // Maximum raw data in frame (content + nonce + overhead)
 	MaxContent   = MaxRawData - box.Overhead - NonceSize // Maximum encrypted content in frame
 )
-
 
 // Wrap a connection in a new BoxTranport
 func NewBoxConn(conn net.Conn, publickey, privateKey, peersPublicKey *[32]byte) (*BoxConn, error) {
