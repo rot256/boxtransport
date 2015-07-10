@@ -10,7 +10,7 @@ import (
 */
 
 // Write bytes to stream
-func (c *BoxConn) Write(b []byte) (n int, err error) {
+func (c BoxConn) Write(b []byte) (n int, err error) {
 	cnt := make(chan int)
 	c.outStream <- &writeRequest{msg: b, n: cnt}
 	for n < len(b) {
@@ -24,7 +24,7 @@ func (c *BoxConn) Write(b []byte) (n int, err error) {
 }
 
 // Read bytes from stream
-func (c *BoxConn) Read(b []byte) (int, error) {
+func (c BoxConn) Read(b []byte) (int, error) {
 	if c.plain.Len() > 0 {
 		return c.plain.Read(b)
 	}
@@ -37,7 +37,7 @@ func (c *BoxConn) Read(b []byte) (int, error) {
 }
 
 // Close BoxConn
-func (c *BoxConn) Close() error {
+func (c BoxConn) Close() error {
 	err := c.conn.Close()
 	if err != nil {
 		return err
@@ -55,22 +55,22 @@ func (c *BoxConn) Close() error {
 
 // Passthough to lower level
 
-func (c *BoxConn) LocalAddr() net.Addr {
+func (c BoxConn) LocalAddr() net.Addr {
 	return c.conn.LocalAddr()
 }
 
-func (c *BoxConn) RemoteAddr() net.Addr {
+func (c BoxConn) RemoteAddr() net.Addr {
 	return c.conn.RemoteAddr()
 }
 
-func (c *BoxConn) SetDeadline(t time.Time) error {
+func (c BoxConn) SetDeadline(t time.Time) error {
 	return c.conn.SetDeadline(t)
 }
 
-func (c *BoxConn) SetWriteDeadline(t time.Time) error {
+func (c BoxConn) SetWriteDeadline(t time.Time) error {
 	return c.conn.SetWriteDeadline(t)
 }
 
-func (c *BoxConn) SetReadDeadline(t time.Time) error {
+func (c BoxConn) SetReadDeadline(t time.Time) error {
 	return c.conn.SetReadDeadline(t)
 }

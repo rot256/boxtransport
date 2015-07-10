@@ -93,13 +93,8 @@ func NewBoxConn(conn net.Conn, publickey, privateKey, peersPublicKey *[32]byte) 
 	return c, nil
 }
 
-// Set hold time (time to wait for additional write calls) [10 microsecs]
-func (c *BoxConn) SetHoldtime(t time.Duration) {
-	c.holdTime = t
-}
-
 // Send a frame manually
-func (c *BoxConn) WriteFrame(frame []byte) error {
+func (c BoxConn) WriteFrame(frame []byte) error {
 	if len(frame) > MaxContent {
 		return errors.New("Frame too large!")
 	}
@@ -116,7 +111,7 @@ func (c *BoxConn) WriteFrame(frame []byte) error {
 }
 
 // Read next frame
-func (c *BoxConn) ReadFrame() ([]byte, error) {
+func (c BoxConn) ReadFrame() ([]byte, error) {
 	select {
 	case err := <-c.errors:
 		return nil, err
@@ -127,11 +122,21 @@ func (c *BoxConn) ReadFrame() ([]byte, error) {
 }
 
 // Read and return excactly n bytes from the stream
-func (c *BoxConn) ReadN(n int) (b []byte, err error) {
+func (c BoxConn) ReadN(n int) (b []byte, err error) {
 	b = make([]byte, n)
 	for tmp := b; len(tmp) > 0 && err == nil; {
 		n, err = c.Read(tmp)
 		tmp = tmp[n:]
 	}
 	return b, err
+}
+
+// Return the public key of the other side (useful when peersPublicKey = nil)
+func (c BoxConn) GetPeerKey() *[32]byte {
+	return c.peersPublicKey
+}
+
+// Set hold time (time to wait for additional write calls) [10 microsecs]
+func (c *BoxConn) SetHoldtime(t time.Duration) {
+	c.holdTime = t
 }
