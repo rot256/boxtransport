@@ -26,7 +26,7 @@ Every frame starts with the length of the message to follow:
 
     Length | Content
 
-The first frame contains exactly 32 bytes which are senders public key (can then be accepted or discarded by the receiver based on peersPublicKey). All subsequent messages will contain NaCl boxes in the content field.
+The first frame contains exactly 32 bytes which are the senders public key (can be accepted or discarded by the receiver based on peersPublicKey). All subsequent messages will contain NaCl boxes in the content field.
 
     Nonce | Box
 
@@ -44,7 +44,9 @@ A : Yes (be aware of the overhead though)
 
 Q : Is every Write in it's own NaCl box?
 
-A : No, BoxTransport attempts to combine multiple writes into a single frame. (even across diffrent goroutines)
+A : No, BoxTransport attempts to combine multiple writes into a single frame 
+(even .Write calls from diffrent goroutines). 
+If you want to create a seperate NaCl Box, you can use .WriteFrame.
 
 ---
 
